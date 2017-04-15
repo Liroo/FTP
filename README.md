@@ -24,6 +24,10 @@ and uninstall from system
 `sudo ./install.sh uninstall /usr/bin`
 
 
+#### Contributions
+
+Feel free to fix/upgrade project using PR.
+
 #### Credits
 
 Pierre Monge
