@@ -31,3 +31,6 @@
 # Debug files
 *.dSYM/
 *.su
+
+# Trick things based on project, as documentation, RFC file, etc...
+trick/
