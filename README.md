@@ -1,5 +1,5 @@
 # FTP
-Server and client TFP developed in C based on [RFC959](https://www.w3.org/Protocols/rfc959/)
+Server and client FTP developed in C based on [RFC959](https://www.w3.org/Protocols/rfc959/)
 
 This is a client/server FTP implementation of the RFC959 using C.
 
