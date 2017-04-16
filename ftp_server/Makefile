@@ -9,13 +9,14 @@ NAME_BIN := server
 SRC_GENDIR := src/
 OBJ_GENDIR := $(OBJ_DIR)src/
 
-SRC_GEN = main.c
+SRC_GEN = main.c \
+	socket.c
 
 OBJ_GEN = $(addprefix $(OBJ_GENDIR), $(SRC_GEN:.c=.o))
 
 # Utility
 
-INCDIRS := -I./includes
+INCDIRS := -I./include
 
 CC = gcc
 
