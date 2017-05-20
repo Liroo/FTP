@@ -1,4 +1,14 @@
-PROJECT := FTP
+##
+## Makefile for FTP_SERVER in /Users/pierre/Epitech/PSU/FTP
+## 
+## Made by Pierre Monge
+## Login   <pierre@epitech.net>
+## 
+## Started on  Sat May 20 04:47:31 2017 Pierre Monge
+## Last update Sat May 20 04:47:56 2017 Pierre Monge
+##
+
+PROJECT := FTP_SERVER
 
 OBJ_DIR := obj/
 
@@ -9,14 +19,21 @@ NAME_BIN := server
 SRC_GENDIR := src/
 OBJ_GENDIR := $(OBJ_DIR)src/
 
-SRC_GEN = main.c \
-	socket.c
+SRC_GEN = \
+	main.c \
+	socket.c \
+	listen_for_client.c \
+	manage_client/manage_new_client.c \
+	manage_client/manage_registered_client.c \
+	manage_client/manage_client_command.c \
+	command/command_list.c
 
 OBJ_GEN = $(addprefix $(OBJ_GENDIR), $(SRC_GEN:.c=.o))
 
 # Utility
 
-INCDIRS := -I./include
+INCDIRS := -I./include -I./src -I./src/manage_client
+INCDIRS += -I./src/command
 
 CC = gcc
 
@@ -32,7 +49,7 @@ RM		:= rm -rf
 
 LOGFILE =	build_log
 ERRLOG = 2>&1 | tee -a $(LOGFILE)
-ERRLOG = 2>> $(LOGFILE)
+ERRLOG += 2>> $(LOGFILE)
 
 # Rules
 

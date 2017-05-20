@@ -7,20 +7,16 @@ usage_and_exit () {
 }
 
 # define binaries name
-CLIENT_DIR="./ftp_client"
 SERVER_DIR="./ftp_server"
-CLIENT="client"
 SERVER="server"
 
 # install the ftp client and server by copying then in the directory passed as parameter
 install () {
-  cp $CLIENT_DIR/$CLIENT $1
   cp $SERVER_DIR/$SERVER $1
 }
 
 # uninstall by deleting the binaries from the directory
 uninstall () {
-  rm -f $1/$CLIENT
   rm -f $1/$SERVER
 }
 
