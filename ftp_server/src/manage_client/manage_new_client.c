@@ -5,16 +5,16 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 05:00:28 2017 Pierre Monge
-** Last update Sat May 20 05:00:39 2017 Pierre Monge
+** Last update Sun May 21 06:21:00 2017 Pierre Monge
 */
 
-#include <unistd.h>
 #include <stdio.h>
+#include <unistd.h>
 #include <string.h>
 
 #include "return_code.h"
-#include "manage_new_client.h"
-#include "manage_registered_client.h"
+#include "request.h"
+#include "manage_client.h"
 
 int	manage_new_client(t_client_info client_info)
 {
@@ -29,7 +29,9 @@ int	manage_new_client(t_client_info client_info)
     {
       return (0);
     }
-  write(client_info.fd, WELCOME_CLIENT, strlen(WELCOME_CLIENT));
+  client_info.username = NULL;
+  client_info.isAuthenticated = false;
+  REQUEST_RESPONSE(client_info.fd, SERVER_220);
   manage_registered_client(client_info);
-  return (-1);
+  return (1);
 }

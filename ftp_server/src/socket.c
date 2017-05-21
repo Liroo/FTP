@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:49:15 2017 Pierre Monge
-** Last update Sat May 20 04:52:44 2017 Pierre Monge
+** Last update Sun May 21 06:34:20 2017 Pierre Monge
 */
 
 #include <sys/types.h>
@@ -50,5 +50,6 @@ int	socket_close(int socket_fd)
       perror(ESOCKET_CLOSE);
       return (-1);
     }
+
   return (0);
 }

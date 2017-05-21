@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:57:15 2017 Pierre Monge
-** Last update Sat May 20 04:57:16 2017 Pierre Monge
+** Last update Sun May 21 06:21:32 2017 Pierre Monge
 */
 
 #include <sys/types.h>
@@ -36,9 +36,7 @@ int		listen_for_client(int socket_fd)
 	  return (-1);
 	}
       if (manage_new_client(client_buffer) != 0)
-	{
-	  return (-1);
-	}
+	break;
     }
-  return (-1);
+  return (0);
 }

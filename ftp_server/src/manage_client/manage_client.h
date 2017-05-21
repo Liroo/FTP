@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:58:19 2017 Pierre Monge
-** Last update Sat May 20 05:10:44 2017 Pierre Monge
+** Last update Sun May 21 05:03:25 2017 Pierre Monge
 */
 
 #ifndef MANAGE_CLIENT_H
@@ -44,6 +44,6 @@ int	manage_registered_client(t_client_info client_info);
       command which one is get by read the remote socket.
       this means the command is an user command
 */
-int	manage_client_command(t_client_info *client_info, const char *command);
+int	manage_client_command(t_client_info *client_info, char *command);
 
 #endif /* !MANAGE_CLIENT_H */

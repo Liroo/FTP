@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:57:33 2017 Pierre Monge
-** Last update Sat May 20 06:04:18 2017 Pierre Monge
+** Last update Sun May 21 04:15:14 2017 Pierre Monge
 */
 
 #ifndef COMMANDS_H
@@ -21,8 +21,15 @@
 */
 typedef		struct s_command_alias {
   char		*title;
+  char		*help;
   int		(*exec)(t_client_info *client_info, char *argument);
 }		t_command_alias;
+
+/*
+  server_get_commands:
+    get all commands alias
+*/
+t_command_alias	*server_get_commands();
 
 /*
   I rewrite some part of the RFC 959 according to this project
@@ -246,7 +253,6 @@ typedef		struct s_command_alias {
                NOOP
                   200
                   500 421
-
 */
 
 /*
@@ -479,11 +485,6 @@ int	server_command_stru(t_client_info *client_info, char *argument);
             The default transfer mode is Stream.
 */
 int	server_command_mode(t_client_info *client_info, char *argument);
-
-/*
-
-*/
-int	server_command_pass(t_client_info *client_info, char *argument);
 
 /*
   The following commands specify FTP service requests

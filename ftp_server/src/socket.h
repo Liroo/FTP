@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:56:45 2017 Pierre Monge
-** Last update Sat May 20 04:56:47 2017 Pierre Monge
+** Last update Sun May 21 05:10:49 2017 Pierre Monge
 */
 
 #ifndef SOCKET_H
@@ -13,6 +13,7 @@
 
 # include <sys/types.h>
 # include <sys/socket.h>
+# include <stdbool.h>
 
 /*
   error define for socket
@@ -55,6 +56,9 @@ typedef			struct s_client_info
   int			fd;
   struct sockaddr	addr;
   socklen_t		addrlen;
+
+  char			*username;
+  bool			isAuthenticated;
 
 }			t_client_info;
 
