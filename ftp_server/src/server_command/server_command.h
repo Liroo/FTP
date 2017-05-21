@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:57:33 2017 Pierre Monge
-** Last update Sun May 21 13:07:07 2017 Pierre Monge
+** Last update Sun May 21 22:03:32 2017 Pierre Monge
 */
 
 #ifndef COMMANDS_H
@@ -42,6 +42,9 @@ extern t_command_alias	server_commands[34];
     get all commands alias
 */
 t_command_alias	*server_get_commands();
+
+int	server_remote_connection(t_client_info *client_info);
+char	*server_get_real_path(char *path, char *root);
 
 /*
   I rewrite some part of the RFC 959 according to this project

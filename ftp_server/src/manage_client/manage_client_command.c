@@ -2,10 +2,10 @@
 ** manage_client_command.c for manage_client in /Users/pierre/Epitech/PSU/FTP
 **
 ** Made by Pierre Monge
-** Login   <pierre@epitech.net>
+** Login   <pierre@epitech.client_info>
 **
 ** Started on  Sat May 20 04:59:40 2017 Pierre Monge
-** Last update Sun May 21 14:04:39 2017 Pierre Monge
+** Last update Sun May 21 18:32:23 2017 Pierre Monge
 */
 
 #include <strings.h>
@@ -30,11 +30,11 @@ int    	manage_client_command(t_client_info *client_info,
       }
     i++;
   }
-  if (!client_info->isAuthenticated)
+  if (!client_info->is_authenticated)
     {
-      REQUEST_RESPONSE(client_info->fd, SERVER_530);
+      REQUEST_RESPONSE(client_info->client.fd, SERVER_530);
       return (0);
     }
-  REQUEST_RESPONSE(client_info->fd, SERVER_500);
+  REQUEST_RESPONSE(client_info->client.fd, SERVER_500);
   return (0);
 }

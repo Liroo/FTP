@@ -2,12 +2,17 @@
 ** server_command.c for server_command.in /Users/pierre/Epitech/PSU/FTP
 **
 ** Made by Pierre Monge
-** Login   <pierre@epitech.net>
+** Login   <pierre@epitech.client_info>
 **
 ** Started on  Sun May 21 04:04:37 2017 Pierre Monge
-** Last update Sun May 21 13:18:35 2017 Pierre Monge
+** Last update Sun May 21 22:33:08 2017 Pierre Monge
 */
 
+#include <string.h>
+#include <limits.h>
+#include <stdlib.h>
+
+#include "request.h"
 #include "server_command.h"
 
 t_command_alias	server_commands[34] = {
@@ -46,3 +51,41 @@ t_command_alias	server_commands[34] = {
   { "NOOP", HELP_NOOP, &server_command_noop },
   { 0 }
 };
+
+int	server_remote_connection(t_client_info *client_info)
+{
+  client_info->data.addrlen = sizeof(struct sockaddr);
+  if (client_info->mode == PASSIV)
+    {
+      if ((client_info->data.fd =
+	  accept(client_info->control.fd,
+		 (struct sockaddr *)&client_info->data.addr,
+		 &client_info->data.addrlen)) == -1)
+	return (REQUEST_RESPONSE(client_info->client.fd, SERVER_421), -1);
+    }
+  else if (client_info->mode == ACTIV &&
+	   connect(client_info->data.fd,
+		   (struct sockaddr *)&client_info->data.addr,
+		   client_info->data.addrlen) == -1)
+    return (REQUEST_RESPONSE(client_info->client.fd, SERVER_421), -1);
+  return (0);
+}
+
+char	*server_get_real_path(char *path, char *root)
+{
+  char	*real_path;
+  char	ret_path[4096];
+
+  printf("test\n");
+  if (path[0] == '/')
+    {
+      sprintf(ret_path, "%s/%s", root, path);
+      real_path = realpath(strdup(ret_path), NULL);
+    }
+  else if (!(real_path = realpath(path, NULL)))
+    {
+      return (NULL);
+    }
+  printf("test1\n");
+  return (real_path);
+}

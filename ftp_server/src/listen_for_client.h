@@ -5,11 +5,13 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:57:04 2017 Pierre Monge
-** Last update Sun May 21 12:19:02 2017 Pierre Monge
+** Last update Sun May 21 18:22:31 2017 Pierre Monge
 */
 
 #ifndef LISTEN_FOR_CLIENT
 # define LISTEN_FOR_CLIENT
+
+# include "socket.h"
 
 # define USAGE(arg) printf("%s port root_path\n", arg)
 
@@ -25,6 +27,6 @@
   This function is basicly an infinite loop which can be
   stop by ctrl-C
 */
-int	listen_for_client(int socket_fd, char *cwd);
+int	listen_for_client(t_client_info *client_buffer, char *cwd);
 
 #endif /* !LISTEN_FOR_CLIENT */

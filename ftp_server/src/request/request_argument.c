@@ -2,10 +2,10 @@
 ** request_argument.c for request_argument in /Users/pierre/Epitech/PSU/FTP
 **
 ** Made by Pierre Monge
-** Login   <pierre@epitech.net>
+** Login   <pierre@epitech.client_info>
 **
 ** Started on  Sun May 21 05:48:55 2017 Pierre Monge
-** Last update Sun May 21 08:29:38 2017 Pierre Monge
+** Last update Sun May 21 20:28:46 2017 Pierre Monge
 */
 
 #include <string.h>
@@ -13,7 +13,7 @@
 
 #include "request.h"
 
-static int	request_count_arguments_non_optimised(char *argument)
+static int	request_count_arguments_non_optimised(char *argument, char delimiter)
 {
   int		words;
   int		inWord;
@@ -22,7 +22,7 @@ static int	request_count_arguments_non_optimised(char *argument)
   inWord = 0;
   while (1)
     {
-      if (*argument == REQUEST_DELIMITER || !*argument)
+      if (*argument == delimiter || !*argument)
 	{
 	  if (inWord)
 	    {
@@ -49,13 +49,40 @@ char	**request_parse_arguments(char *arg)
   if (strlen(arg) >= strlen(REQUEST_END) &&
       strcmp(arg + strlen(arg) - strlen(REQUEST_END), REQUEST_END) == 0)
     arg[strlen(arg) - strlen(REQUEST_END)] = 0;
-  wordCount = request_count_arguments_non_optimised(arg);
+  wordCount = request_count_arguments_non_optimised(arg, REQUEST_DELIMITER);
   if (!(args = malloc(sizeof(char *) * (wordCount + 1))))
     return (NULL);
   i = 0;
   while (i < wordCount)
     {
       s = strtok(i == 0 ? arg : NULL, REQUEST_DELIMITER_PTR);
+      if (!s)
+	return (NULL);
+      if (!(args[i] = strdup(s)))
+	return (NULL);
+      i++;
+    }
+  args[i] = NULL;
+  return (args);
+}
+
+char	**request_parse_arguments_delimiter(char *arg, char delimiter)
+{
+  char	**args;
+  int	wordCount;
+  int	i;
+  char	*s;
+
+  if (strlen(arg) >= strlen(REQUEST_END) &&
+      strcmp(arg + strlen(arg) - strlen(REQUEST_END), REQUEST_END) == 0)
+    arg[strlen(arg) - strlen(REQUEST_END)] = 0;
+  wordCount = request_count_arguments_non_optimised(arg, delimiter);
+  if (!(args = malloc(sizeof(char *) * (wordCount + 1))))
+    return (NULL);
+  i = 0;
+  while (i < wordCount)
+    {
+      s = strtok(i == 0 ? arg : NULL, &delimiter);
       if (!s)
 	return (NULL);
       if (!(args[i] = strdup(s)))

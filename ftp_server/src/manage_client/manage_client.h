@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:58:19 2017 Pierre Monge
-** Last update Sun May 21 12:13:35 2017 Pierre Monge
+** Last update Sun May 21 18:30:52 2017 Pierre Monge
 */
 
 #ifndef MANAGE_CLIENT_H
@@ -24,7 +24,7 @@
       This function will also send a welcome message on
 */
 
-int	manage_new_client(t_client_info client_info, char *cwd);
+int	manage_new_client(t_client_info *client_info, char *cwd);
 
 /*
   manage_registered_client:
@@ -34,7 +34,7 @@ int	manage_new_client(t_client_info client_info, char *cwd);
       This function will also send a welcome message on
 */
 
-int	manage_registered_client(t_client_info client_info);
+int	manage_registered_client(t_client_info *client_info);
 
 /*
   manage_client_command:

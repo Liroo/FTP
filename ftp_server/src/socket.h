@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:56:45 2017 Pierre Monge
-** Last update Sun May 21 14:18:49 2017 Pierre Monge
+** Last update Sun May 21 19:38:27 2017 Pierre Monge
 */
 
 #ifndef SOCKET_H
@@ -13,6 +13,7 @@
 
 # include <sys/types.h>
 # include <sys/socket.h>
+# include <netinet/in.h>
 # include <stdbool.h>
 
 /*
@@ -51,16 +52,33 @@
     addrelen (socklen_t):
       opaque info about client
 */
-typedef			struct s_client_info
+typedef enum   	e_ftp_mode {
+  DEFAULT,
+  PASSIV,
+  ACTIV,
+}		t_ftp_mode;
+
+typedef			struct s_socket_info
 {
   int			fd;
-  struct sockaddr	addr;
+  struct sockaddr_in	addr;
   socklen_t		addrlen;
+}			t_socket_info;
 
+typedef			struct s_client_info
+{
+  t_socket_info		client;
+  t_socket_info		server;
+  t_socket_info		control;
+  t_socket_info		data;
+
+  bool			data_in_use;
+
+  t_ftp_mode		mode;
   char			root_dir[4096];
   char			cwd[4096];
   char			*username;
-  bool			isAuthenticated;
+  bool			is_authenticated;
 
 }			t_client_info;
 
@@ -74,7 +92,7 @@ typedef			struct s_client_info
 
   Open a socket in TCP protocol and bind it to the port
 */
-int	socket_open(unsigned int port);
+int	socket_open(t_socket_info *socket_info, unsigned int port);
 
 /*
   socket_close:
@@ -86,5 +104,11 @@ int	socket_open(unsigned int port);
   Close the file descriptor associed to socket
 */
 int	socket_close(int socket_fd);
+
+/*
+  socket_get_ip (t_socket_info)
+  get ip of socket
+*/
+char		*socket_get_ip(t_socket_info socket_info);
 
 #endif /* !SOCKET */
