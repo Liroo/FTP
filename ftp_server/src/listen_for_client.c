@@ -5,11 +5,12 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:57:15 2017 Pierre Monge
-** Last update Sun May 21 06:21:32 2017 Pierre Monge
+** Last update Sun May 21 07:19:08 2017 Pierre Monge
 */
 
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <netinet/in.h>
 #include <stdio.h>
 
 #include "listen_for_client.h"
@@ -27,10 +28,13 @@ int		listen_for_client(int socket_fd)
 {
   t_client_info	client_buffer;
 
+  client_buffer.addrlen = sizeof(struct sockaddr_in);
   while (1)
     {
       if ((client_buffer.fd =
-	   accept(socket_fd, &client_buffer.addr, &client_buffer.addrlen)) < -1)
+	   accept(socket_fd,
+		  (struct sockaddr *)&client_buffer.addr,
+		  &client_buffer.addrlen)) < -1)
 	{
 	  perror(EACCEPT_CLIENT);
 	  return (-1);

@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 08:04:17 2017 Pierre Monge
-** Last update Sun May 21 06:13:12 2017 Pierre Monge
+** Last update Sun May 21 08:04:52 2017 Pierre Monge
 */
 
 #ifndef REQUEST_H
@@ -13,7 +13,12 @@
 
 # include <stdio.h>
 
+# define REQUEST_DELIMITER ' '
+# define REQUEST_DELIMITER_PTR " "
 # define REQUEST_END "\r\n"
+
+# define DB_USERNAME "anonymous"
+# define DB_PASS ""
 
 # define REQUEST_RESPONSE(fd, format, ...) \
   dprintf(fd, format""REQUEST_END, ##__VA_ARGS__)
@@ -43,6 +48,7 @@ int	request_count_arguments(char **arguments);
 
 # define SERVER_220 "220 (myFTP, v1.0)"
 # define SERVER_221 "221 Service closing control connection."
+# define SERVER_230 "230 User logged in, proceed."
 
 # define SERVER_331 "331 User name okay, need password."
 
@@ -50,6 +56,7 @@ int	request_count_arguments(char **arguments);
 
 # define SERVER_500 "500 Syntax error, command unrecognized."
 # define SERVER_502 "502 Command not implemented."
+# define SERVER_503 "503 Bad sequence of commands."
 # define SERVER_530 "530 Not logged in."
 
 #endif /* !REQUEST_H */

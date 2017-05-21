@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:59:40 2017 Pierre Monge
-** Last update Sun May 21 05:03:16 2017 Pierre Monge
+** Last update Sun May 21 07:21:36 2017 Pierre Monge
 */
 
 #include <strings.h>
@@ -25,7 +25,8 @@ int			manage_client_command(t_client_info *client_info,
     if (strncasecmp(command, (*server_commands).title,
 		    strlen((*server_commands).title)) == 0)
       {
-	return (*server_commands).exec(client_info, command);
+	return (*server_commands)
+	  .exec(client_info, command + strlen((*server_commands).title));
       }
     server_commands++;
   }
