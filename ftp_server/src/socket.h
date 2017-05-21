@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:56:45 2017 Pierre Monge
-** Last update Sun May 21 05:10:49 2017 Pierre Monge
+** Last update Sun May 21 14:18:49 2017 Pierre Monge
 */
 
 #ifndef SOCKET_H
@@ -57,6 +57,8 @@ typedef			struct s_client_info
   struct sockaddr	addr;
   socklen_t		addrlen;
 
+  char			root_dir[4096];
+  char			cwd[4096];
   char			*username;
   bool			isAuthenticated;
 

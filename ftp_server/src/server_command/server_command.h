@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:57:33 2017 Pierre Monge
-** Last update Sun May 21 04:15:14 2017 Pierre Monge
+** Last update Sun May 21 13:07:07 2017 Pierre Monge
 */
 
 #ifndef COMMANDS_H
@@ -24,6 +24,18 @@ typedef		struct s_command_alias {
   char		*help;
   int		(*exec)(t_client_info *client_info, char *argument);
 }		t_command_alias;
+
+/*
+  definition of commands in server_command.c
+
+  I use global because function is maximum 25 lines
+  and I get 33 commands to be agree with rfc...
+
+  This is no because I wanted to simplify my life, the only
+  purpose of such this things is to respect the codding style
+  and to be zen when I read my code...
+*/
+extern t_command_alias	server_commands[34];
 
 /*
   server_get_commands:
@@ -261,6 +273,7 @@ t_command_alias	*server_get_commands();
 
 /*
          USER NAME (USER)
+	 USER <SP> <username> <CRLF>
 
             The argument field is a Telnet string identifying the user.
             The user identification is that which is required by the
@@ -279,9 +292,11 @@ t_command_alias	*server_get_commands();
             parameters.
 */
 int	server_command_user(t_client_info *client_info, char *argument);
+# define HELP_USER "USER <SP> <username> <CRLF>"
 
 /*
          PASSWORD (PASS)
+	 PASS <SP> <password> <CRLF>
 
             The argument field is a Telnet string specifying the user's
             password.  This command must be immediately preceded by the
@@ -294,9 +309,11 @@ int	server_command_user(t_client_info *client_info, char *argument);
             the sensitive password information.
 */
 int	server_command_pass(t_client_info *client_info, char *argument);
+# define HELP_PASS "PASS <SP> <password> <CRLF>"
 
 /*
          ACCOUNT (ACCT)
+	 ACCT <SP> <account-information> <CRLF>
 
             The argument field is a Telnet string identifying the user's
             account.  The command is not necessarily related to the USER
@@ -316,9 +333,11 @@ int	server_command_pass(t_client_info *client_info, char *argument);
             command, respectively.
 */
 int	server_command_acct(t_client_info *client_info, char *argument);
+# define HELP_ACCT "ACCT <SP> <account-information> <CRLF>"
 
 /*
          CHANGE WORKING DIRECTORY (CWD)
+	 CWD  <SP> <pathname> <CRLF>
 
             This command allows the user to work with a different
             directory or dataset for file storage or retrieval without
@@ -328,9 +347,11 @@ int	server_command_acct(t_client_info *client_info, char *argument);
             file group designator.
 */
 int	server_command_cwd(t_client_info *client_info, char *argument);
+# define HELP_CWD "CWD  <SP> <pathname> <CRLF>"
 
 /*
          CHANGE TO PARENT DIRECTORY (CDUP)
+	 CDUP <CRLF>
 
             This command is a special case of CWD, and is included to
             simplify the implementation of programs for transferring
@@ -341,9 +362,11 @@ int	server_command_cwd(t_client_info *client_info, char *argument);
 
 */
 int	server_command_cdup(t_client_info *client_info, char *argument);
+# define HELP_CDUP "CDUP <CRLF>"
 
 /*
          STRUCTURE MOUNT (SMNT)
+	 SMNT <SP> <pathname> <CRLF>
 
             This command allows the user to mount a different file
             system data structure without altering his login or
@@ -352,10 +375,12 @@ int	server_command_cdup(t_client_info *client_info, char *argument);
             directory or other system dependent file group designator.
 */
 int	server_command_smnt(t_client_info *client_info, char *argument);
+# define HELP_SMNT "SMNT <SP> <pathname> <CRLF>"
 
 /*
 
          REINITIALIZE (REIN)
+	 REIN <CRLF>
 
             This command terminates a USER, flushing all I/O and account
             information, except to allow any transfer in progress to be
@@ -367,9 +392,13 @@ int	server_command_smnt(t_client_info *client_info, char *argument);
 
 */
 int	server_command_rein(t_client_info *client_info, char *argument);
+# define HELP_REIN "REIN <CRLF>"
+
 
 /*
          LOGOUT (QUIT)
+	 QUIT <CRLF>
+
 
             This command terminates a USER and if file transfer is not
             in progress, the server closes the control connection.  If
@@ -384,6 +413,7 @@ int	server_command_rein(t_client_info *client_info, char *argument);
             logout (QUIT).
 */
 int	server_command_quit(t_client_info *client_info, char *argument);
+# define HELP_QUIT "QUIT <CRLF>"
 
 
 /*
@@ -392,6 +422,7 @@ int	server_command_quit(t_client_info *client_info, char *argument);
 
 /*
          DATA PORT (PORT)
+	 PORT <SP> <host-port> <CRLF>
 
             The argument is a HOST-PORT specification for the data port
             to be used in data connection.  There are defaults for both
@@ -410,9 +441,11 @@ int	server_command_quit(t_client_info *client_info, char *argument);
             address.
 */
 int	server_command_port(t_client_info *client_info, char *argument);
+# define HELP_PORT "PORT <SP> <host-port> <CRLF>"
 
 /*
          PASSIVE (PASV)
+	 PASV <CRLF>
 
             This command requests the server-DTP to "listen" on a data
             port (which is not its default data port) and to wait for a
@@ -421,9 +454,11 @@ int	server_command_port(t_client_info *client_info, char *argument);
             host and port address this server is listening on.
 */
 int	server_command_pasv(t_client_info *client_info, char *argument);
+# define HELP_PASV "PASV <CRLF>"
 
 /*
          REPRESENTATION TYPE (TYPE)
+	 TYPE <SP> <type-code> <CRLF>
 
             The argument specifies the representation type as described
             in the Section on Data Representation and Storage.  Several
@@ -451,9 +486,11 @@ int	server_command_pasv(t_client_info *client_info, char *argument);
             default.
 */
 int	server_command_type(t_client_info *client_info, char *argument);
+# define HELP_TYPE "TYPE <SP> <type-code> <CRLF>"
 
 /*
          FILE STRUCTURE (STRU)
+	 STRU <SP> <structure-code> <CRLF>
 
             The argument is a single Telnet character code specifying
             file structure described in the Section on Data
@@ -468,9 +505,11 @@ int	server_command_type(t_client_info *client_info, char *argument);
             The default structure is File.
 */
 int	server_command_stru(t_client_info *client_info, char *argument);
+# define HELP_STRU "STRU <SP> <structure-code> <CRLF>"
 
 /*
          TRANSFER MODE (MODE)
+	 MODE <SP> <mode-code> <CRLF>
 
             The argument is a single Telnet character code specifying
             the data transfer modes described in the Section on
@@ -485,6 +524,7 @@ int	server_command_stru(t_client_info *client_info, char *argument);
             The default transfer mode is Stream.
 */
 int	server_command_mode(t_client_info *client_info, char *argument);
+# define HELP_MODE "MODE <SP> <mode-code> <CRLF>"
 
 /*
   The following commands specify FTP service requests
@@ -492,6 +532,7 @@ int	server_command_mode(t_client_info *client_info, char *argument);
 
 /*
          RETRIEVE (RETR)
+	 RETR <SP> <pathname> <CRLF>
 
             This command causes the server-DTP to transfer a copy of the
             file, specified in the pathname, to the server- or user-DTP
@@ -499,9 +540,11 @@ int	server_command_mode(t_client_info *client_info, char *argument);
             contents of the file at the server site shall be unaffected.
 */
 int	server_command_retr(t_client_info *client_info, char *argument);
+# define HELP_RETR "RETR <SP> <pathname> <CRLF>"
 
 /*
          STORE (STOR)
+	 STOR <SP> <pathname> <CRLF>
 
             This command causes the server-DTP to accept the data
             transferred via the data connection and to store the data as
@@ -512,9 +555,11 @@ int	server_command_retr(t_client_info *client_info, char *argument);
             pathname does not already exist.
 */
 int	server_command_stor(t_client_info *client_info, char *argument);
+# define HELP_STOR "STOR <SP> <pathname> <CRLF>"
 
 /*
          STORE UNIQUE (STOU)
+	 STOU <CRLF>
 
             This command behaves like STOR except that the resultant
             file is to be created in the current directory under a name
@@ -522,9 +567,11 @@ int	server_command_stor(t_client_info *client_info, char *argument);
             must include the name generated.
 */
 int	server_command_stou(t_client_info *client_info, char *argument);
+# define HELP_STOU "STOU <CRLF>"
 
 /*
          APPEND (with create) (APPE)
+	 APPE <SP> <pathname> <CRLF>
 
             This command causes the server-DTP to accept the data
             transferred via the data connection and to store the data in
@@ -534,10 +581,13 @@ int	server_command_stou(t_client_info *client_info, char *argument);
             pathname shall be created at the server site.
 */
 int	server_command_appe(t_client_info *client_info, char *argument);
+# define HELP_APPE "APPE <SP> <pathname> <CRLF>"
 
 /*
 
          ALLOCATE (ALLO)
+	 ALLO <SP> <decimal-integer>
+                [<SP> R <SP> <decimal-integer>] <CRLF>
 
             This command may be required by some servers to reserve
             sufficient storage to accommodate the new file to be
@@ -558,9 +608,11 @@ int	server_command_appe(t_client_info *client_info, char *argument);
             in the first argument and ignore it.
 */
 int	server_command_allo(t_client_info *client_info, char *argument);
+# define HELP_ALLO "ALLO <SP> <decimal-integer>"
 
 /*
          RESTART (REST)
+	 REST <SP> <marker> <CRLF>
 
             The argument field represents the server marker at which
             file transfer is to be restarted.  This command does not
@@ -570,18 +622,22 @@ int	server_command_allo(t_client_info *client_info, char *argument);
             file transfer to resume.
 */
 int	server_command_rest(t_client_info *client_info, char *argument);
+# define HELP_REST "REST <SP> <marker> <CRLF>"
 
 /*
          RENAME FROM (RNFR)
+	 RNFR <SP> <pathname> <CRLF>
 
             This command specifies the old pathname of the file which is
             to be renamed.  This command must be immediately followed by
             a "rename to" command specifying the new file pathname.
 */
 int	server_command_rnfr(t_client_info *client_info, char *argument);
+# define HELP_RNFR "RNFR <SP> <pathname> <CRLF>"
 
 /*
          RENAME TO (RNTO)
+	 RNTO <SP> <pathname> <CRLF>
 
             This command specifies the new pathname of the file
             specified in the immediately preceding "rename from"
@@ -589,10 +645,12 @@ int	server_command_rnfr(t_client_info *client_info, char *argument);
             renamed.
 */
 int	server_command_rnto(t_client_info *client_info, char *argument);
+# define HELP_RNTO "RNTO <SP> <pathname> <CRLF>"
 
 /*
 
          ABORT (ABOR)
+	 ABOR <CRLF>
 
             This command tells the server to abort the previous FTP
             service command and any associated transfer of data.  The
@@ -619,9 +677,11 @@ int	server_command_rnto(t_client_info *client_info, char *argument);
 
 */
 int	server_command_abor(t_client_info *client_info, char *argument);
+# define HELP_ABOR "ABOR <CRLF>"
 
 /*
          DELETE (DELE)
+	 DELE <SP> <pathname> <CRLF>
 
             This command causes the file specified in the pathname to be
             deleted at the server site.  If an extra level of protection
@@ -629,9 +689,11 @@ int	server_command_abor(t_client_info *client_info, char *argument);
             delete?"), it should be provided by the user-FTP process.
 */
 int	server_command_dele(t_client_info *client_info, char *argument);
+# define HELP_DELE "DELE <SP> <pathname> <CRLF>"
 
 /*
          REMOVE DIRECTORY (RMD)
+	 RMD  <SP> <pathname> <CRLF>
 
             This command causes the directory specified in the pathname
             to be removed as a directory (if the pathname is absolute)
@@ -639,9 +701,11 @@ int	server_command_dele(t_client_info *client_info, char *argument);
             the pathname is relative).  See Appendix II.
 */
 int	server_command_rmd(t_client_info *client_info, char *argument);
+# define HELP_RMD "RMD  <SP> <pathname> <CRLF>"
 
 /*
          MAKE DIRECTORY (MKD)
+	 MKD  <SP> <pathname> <CRLF>
 
             This command causes the directory specified in the pathname
             to be created as a directory (if the pathname is absolute)
@@ -649,17 +713,21 @@ int	server_command_rmd(t_client_info *client_info, char *argument);
             the pathname is relative).  See Appendix II.
 */
 int	server_command_mdk(t_client_info *client_info, char *argument);
+# define HELP_MDK "MKD  <SP> <pathname> <CRLF>"
 
 /*
          PRINT WORKING DIRECTORY (PWD)
+	 PWD  <CRLF>
 
             This command causes the name of the current working
             directory to be returned in the reply.  See Appendix II.
 */
 int	server_command_pwd(t_client_info *client_info, char *argument);
+# define HELP_PWD "PWD  <CRLF>"
 
 /*
          LIST (LIST)
+	 LIST [<SP> <pathname>] <CRLF>
 
             This command causes a list to be sent from the server to the
             passive DTP.  If the pathname specifies a directory or other
@@ -676,10 +744,12 @@ int	server_command_pwd(t_client_info *client_info, char *argument);
 
 */
 int	server_command_list(t_client_info *client_info, char *argument);
+# define HELP_LIST "LIST [<SP> <pathname>] <CRLF>"
 
 /*
 
          NAME LIST (NLST)
+	 NLST [<SP> <pathname>] <CRLF>
 
             This command causes a directory listing to be sent from
             server to user site.  The pathname should specify a
@@ -695,10 +765,12 @@ int	server_command_list(t_client_info *client_info, char *argument);
             the implementation of a "multiple get" function.
 */
 int	server_command_nlst(t_client_info *client_info, char *argument);
+# define HELP_NLST "NLST [<SP> <pathname>] <CRLF>"
 
 /*
 
          SITE PARAMETERS (SITE)
+	 SITE <SP> <string> <CRLF>
 
             This command is used by the server to provide services
             specific to his system that are essential to file transfer
@@ -708,9 +780,11 @@ int	server_command_nlst(t_client_info *client_info, char *argument);
             the HELP SITE command.
 */
 int	server_command_site(t_client_info *client_info, char *argument);
+# define HELP_SITE "SITE <SP> <string> <CRLF>"
 
 /*
          SYSTEM (SYST)
+	 SYST <CRLF>
 
             This command is used to find out the type of operating
             system at the server.  The reply shall have as its first
@@ -718,9 +792,11 @@ int	server_command_site(t_client_info *client_info, char *argument);
             of the Assigned Numbers document [4].
 */
 int	server_command_syst(t_client_info *client_info, char *argument);
+# define HELP_SYST "SYST <CRLF>"
 
 /*
          STATUS (STAT)
+	 STAT [<SP> <pathname>] <CRLF>
 
             This command shall cause a status response to be sent over
             the control connection in the form of a reply.  The command
@@ -740,9 +816,11 @@ int	server_command_syst(t_client_info *client_info, char *argument);
             the status of connections.
 */
 int	server_command_stat(t_client_info *client_info, char *argument);
+# define HELP_STAT "STAT [<SP> <pathname>] <CRLF>"
 
 /*
          HELP (HELP)
+	 HELP [<SP> <string>] <CRLF>
 
             This command shall cause the server to send helpful
             information regarding its implementation status over the
@@ -754,14 +832,17 @@ int	server_command_stat(t_client_info *client_info, char *argument);
             site-dependent parameters, e.g., in response to HELP SITE.
 */
 int	server_command_help(t_client_info *client_info, char *argument);
+# define HELP_HELP "HELP [<SP> <string>] <CRLF>"
 
 /*
          NOOP (NOOP)
+	 NOOP <CRLF>
 
             This command does not affect any parameters or previously
             entered commands. It specifies no action other than that the
             server send an OK reply.
 */
 int	server_command_noop(t_client_info *client_info, char *argument);
+# define HELP_NOOP "NOOP <CRLF>"
 
 #endif /* !COMMANDS_H */

@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:59:40 2017 Pierre Monge
-** Last update Sun May 21 07:21:36 2017 Pierre Monge
+** Last update Sun May 21 14:04:39 2017 Pierre Monge
 */
 
 #include <strings.h>
@@ -15,20 +15,20 @@
 #include "server_command.h"
 #include "request.h"
 
-int			manage_client_command(t_client_info *client_info,
-					      char *command)
+int    	manage_client_command(t_client_info *client_info,
+			      char *command)
 {
-  t_command_alias      *server_commands;
+  int	i;
 
-  server_commands = server_get_commands();
-  while (*((char *)server_commands)) {
-    if (strncasecmp(command, (*server_commands).title,
-		    strlen((*server_commands).title)) == 0)
+  i = 0;
+  while (server_commands[i].title) {
+    if (strncasecmp(command, server_commands[i].title,
+		    strlen(server_commands[i].title)) == 0)
       {
-	return (*server_commands)
-	  .exec(client_info, command + strlen((*server_commands).title));
+	return (server_commands[i]
+		.exec(client_info, command + strlen(server_commands[i].title)));
       }
-    server_commands++;
+    i++;
   }
   if (!client_info->isAuthenticated)
     {

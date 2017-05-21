@@ -5,11 +5,13 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:57:04 2017 Pierre Monge
-** Last update Sat May 20 04:57:04 2017 Pierre Monge
+** Last update Sun May 21 12:19:02 2017 Pierre Monge
 */
 
 #ifndef LISTEN_FOR_CLIENT
 # define LISTEN_FOR_CLIENT
+
+# define USAGE(arg) printf("%s port root_path\n", arg)
 
 # define EACCEPT_CLIENT "Client socket failed to connect"
 
@@ -23,6 +25,6 @@
   This function is basicly an infinite loop which can be
   stop by ctrl-C
 */
-int	listen_for_client(int socket_fd);
+int	listen_for_client(int socket_fd, char *cwd);
 
 #endif /* !LISTEN_FOR_CLIENT */

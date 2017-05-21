@@ -5,18 +5,27 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 05:00:28 2017 Pierre Monge
-** Last update Sun May 21 06:21:00 2017 Pierre Monge
+** Last update Sun May 21 14:28:09 2017 Pierre Monge
 */
 
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
 
-#include "return_code.h"
 #include "request.h"
 #include "manage_client.h"
 
-int	manage_new_client(t_client_info client_info)
+static void	manage_new_client_init(t_client_info *client_info,
+				       char *cwd)
+{
+  strcpy(client_info->root_dir, cwd);
+  strcpy(client_info->cwd, cwd);
+  client_info->username = NULL;
+  client_info->isAuthenticated = false;
+  REQUEST_RESPONSE(client_info->fd, SERVER_220);
+}
+
+int	manage_new_client(t_client_info client_info, char *cwd)
 {
   int	instance_pid;
 
@@ -29,9 +38,7 @@ int	manage_new_client(t_client_info client_info)
     {
       return (0);
     }
-  client_info.username = NULL;
-  client_info.isAuthenticated = false;
-  REQUEST_RESPONSE(client_info.fd, SERVER_220);
+  manage_new_client_init(&client_info, cwd);
   manage_registered_client(client_info);
   return (1);
 }

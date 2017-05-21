@@ -5,13 +5,14 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:57:15 2017 Pierre Monge
-** Last update Sun May 21 07:19:08 2017 Pierre Monge
+** Last update Sun May 21 14:24:17 2017 Pierre Monge
 */
 
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "listen_for_client.h"
 #include "socket.h"
@@ -24,10 +25,11 @@
   We will use a signal handler to catch and exit the server
 */
 
-int		listen_for_client(int socket_fd)
+int		listen_for_client(int socket_fd, char *cwd)
 {
   t_client_info	client_buffer;
 
+  memset(&client_buffer, 0, sizeof(t_client_info));
   client_buffer.addrlen = sizeof(struct sockaddr_in);
   while (1)
     {
@@ -39,7 +41,7 @@ int		listen_for_client(int socket_fd)
 	  perror(EACCEPT_CLIENT);
 	  return (-1);
 	}
-      if (manage_new_client(client_buffer) != 0)
+      if (manage_new_client(client_buffer, cwd) != 0)
 	break;
     }
   return (0);

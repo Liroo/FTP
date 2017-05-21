@@ -5,7 +5,7 @@
 ## Login   <pierre@epitech.net>
 ## 
 ## Started on  Sat May 20 04:47:31 2017 Pierre Monge
-## Last update Sun May 21 05:49:23 2017 Pierre Monge
+## Last update Sun May 21 12:00:46 2017 Pierre Monge
 ##
 
 PROJECT := FTP_SERVER
@@ -69,7 +69,7 @@ OBJ_GEN = $(addprefix $(OBJ_GENDIR), $(SRC_GEN:.c=.o))
 
 # Utility
 
-INCDIRS := -I./include -I./src -I./src/manage_client
+INCDIRS := -I./src -I./src/manage_client
 INCDIRS += -I./src/server_command -I./src/request
 
 CC = gcc

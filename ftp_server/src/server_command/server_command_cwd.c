@@ -5,13 +5,13 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sun May 21 03:54:49 2017 Pierre Monge
-** Last update Sun May 21 03:54:53 2017 Pierre Monge
+** Last update Sun May 21 13:18:50 2017 Pierre Monge
 */
 
 #include "server_command.h"
 #include "request.h"
 
-int	server_command_cdw(t_client_info *client_info, char *argument)
+int	server_command_cwd(t_client_info *client_info, char *argument)
 {
   if (!client_info->isAuthenticated)
     {
