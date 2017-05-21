@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.client_info>
 **
 ** Started on  Sun May 21 05:48:55 2017 Pierre Monge
-** Last update Sun May 21 20:28:46 2017 Pierre Monge
+** Last update Sun May 21 22:42:16 2017 Pierre Monge
 */
 
 #include <string.h>
@@ -36,7 +36,7 @@ static int	request_count_arguments_non_optimised(char *argument, char delimiter)
 	inWord = 1;
       argument++;
     }
-  return words;
+  return (words);
 }
 
 char	**request_parse_arguments(char *arg)

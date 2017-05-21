@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 08:04:17 2017 Pierre Monge
-** Last update Sun May 21 21:03:13 2017 Pierre Monge
+** Last update Sun May 21 22:52:28 2017 Pierre Monge
 */
 
 #ifndef REQUEST_H
@@ -32,32 +32,32 @@
 
 # define SINGLE_STRING "%s"
 /*
-  request argument
-
-  request argument is a minimal lib that provider some functions
-  to parse and affect arguments on arguments passed with commands
+**  request argument
+**
+**  request argument is a minimal lib that provider some functions
+**  to parse and affect arguments on arguments passed with commands
 */
 
 /*
-  this function decompose argument request to multiple tokens
-  and the other is to free them
+**  this function decompose argument request to multiple tokens
+**  and the other is to free them
 */
 char	**request_parse_arguments(char *argument);
 char	**request_parse_arguments_delimiter(char *argument, char delimiter);
 void	request_free_arguments(char **arguments);
 
 /*
-  this function basicly count argument of a char**
+**  this function basicly count argument of a char**
 */
 int	request_count_arguments(char **arguments);
 
 /*
-  request response, utils
+**  request response, utils
 */
 # define SERVER_HELP_FULL "Server recognize these commands:"
 
 /*
-  request response, code error and else
+**  request response, code error and else
 */
 
 # define SERVER_150 "150 File status okay; about to open data connection."

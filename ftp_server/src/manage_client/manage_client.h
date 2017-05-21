@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 04:58:19 2017 Pierre Monge
-** Last update Sun May 21 18:30:52 2017 Pierre Monge
+** Last update Sun May 21 22:53:05 2017 Pierre Monge
 */
 
 #ifndef MANAGE_CLIENT_H
@@ -17,32 +17,32 @@
 # define COMMAND_LEN_MAX 1024
 
 /*
-  manage_new_client:
-    client_info (t_client_info):
-      client info used to future handling of commands
-
-      This function will also send a welcome message on
+**  manage_new_client:
+**    client_info (t_client_info):
+**      client info used to future handling of commands
+**
+**      This function will also send a welcome message on
 */
 
 int	manage_new_client(t_client_info *client_info, char *cwd);
 
 /*
-  manage_registered_client:
-    client_info (t_client_info):
-      client info used to future handling of commands
-
-      This function will also send a welcome message on
+**  manage_registered_client:
+**    client_info (t_client_info):
+**      client info used to future handling of commands
+**
+**      This function will also send a welcome message on
 */
 
 int	manage_registered_client(t_client_info *client_info);
 
 /*
-  manage_client_command:
-    client_info (t_client_info *):
-      client info
-    command (const char *):
-      command which one is get by read the remote socket.
-      this means the command is an user command
+**  manage_client_command:
+**    client_info (t_client_info *):
+**      client info
+**    command (const char *):
+**      command which one is get by read the remote socket.
+**      this means the command is an user command
 */
 int	manage_client_command(t_client_info *client_info, char *command);
 

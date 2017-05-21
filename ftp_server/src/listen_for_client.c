@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.client_info>
 **
 ** Started on  Sat May 20 04:57:15 2017 Pierre Monge
-** Last update Sun May 21 18:50:04 2017 Pierre Monge
+** Last update Sun May 21 22:43:15 2017 Pierre Monge
 */
 
 #include <sys/types.h>
@@ -16,13 +16,6 @@
 #include "listen_for_client.h"
 #include "socket.h"
 #include "manage_client.h"
-
-/*
-  This is not endeable loop except on Ctrl-C, this is why
-  there is a while (1).
-
-  We will use a signal handler to catch and exit the server
-*/
 
 int		listen_for_client(t_client_info *client_buffer, char *cwd)
 {
