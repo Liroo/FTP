@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.client_info>
 **
 ** Started on  Sun May 21 05:48:55 2017 Pierre Monge
-** Last update Wed May 24 16:30:49 2017 Pierre Monge
+** Last update Wed May 24 18:25:46 2017 Pierre Monge
 */
 
 #include <string.h>
@@ -49,8 +49,9 @@ char	**request_parse_arguments(char *arg)
   if (strlen(arg) >= strlen(REQUEST_END) &&
       strcmp(arg + strlen(arg) - strlen(REQUEST_END), REQUEST_END) == 0)
     arg[strlen(arg) - strlen(REQUEST_END)] = 0;
-  arg[strlen(arg) - 1] = arg[strlen(arg) - 1] == '\n' ? 0 :
-    arg[strlen(arg) - 1];
+  if (strlen(arg) > 0)
+    arg[strlen(arg) - 1] = arg[strlen(arg) - 1] == '\n' ? 0 :
+      arg[strlen(arg) - 1];
   wordCount = request_count_arguments_non_optimised(arg, REQUEST_DELIMITER);
   if (!(args = malloc(sizeof(char *) * (wordCount + 1))))
     return (NULL);
