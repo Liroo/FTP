@@ -5,7 +5,7 @@
 ** Login   <pierre@epitech.net>
 **
 ** Started on  Sat May 20 08:04:17 2017 Pierre Monge
-** Last update Sun May 21 22:52:28 2017 Pierre Monge
+** Last update Wed May 24 16:26:31 2017 Pierre Monge
 */
 
 #ifndef REQUEST_H
@@ -17,6 +17,7 @@
 # define REQUEST_DELIMITER_PTR " "
 # define REQUEST_L "\n"
 # define REQUEST_END "\r\n"
+# define REQUEST_END_L "\n"
 
 # define DB_USERNAME "anonymous"
 # define DB_PASS ""
